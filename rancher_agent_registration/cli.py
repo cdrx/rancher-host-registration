@@ -17,7 +17,9 @@ from time import sleep
               help="Print the docker run command to the console, instead of running it")
 @click.option('--sudo', default=True, is_flag=True,
               help="Use sudo for docker run ...")
-def main(url, key, secret, environment, echo, sudo):
+@click.option('--labels', default = None,
+              help="Comma delimited list of k=v host labels")
+def main(url, key, secret, environment, echo, sudo, labels):
     """Registers the current host with your Rancher server, creating the necessary registration keys."""
     # split url to protocol and host
     if "://" not in url:
@@ -74,6 +76,11 @@ def main(url, key, secret, environment, echo, sudo):
 
     if not command:
         bail("Cant register this host: Rancher didn't activate the new registration token.")
+
+    if labels:
+        labels = labels.replace(',', '&')
+        point = command.find('run')+len('run')
+        command = command[:point] + " -e CATTLE_HOST_LABELS='{0}'".format(labels) + command[point:]
 
     if echo:
         msg(command)
