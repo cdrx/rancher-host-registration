@@ -28,6 +28,8 @@ You can run the tool interactivly and it will prompt you for the settings it nee
 
 If you want to test rancher-agent-registration, you can pass --echo and it will print the docker command to run to the console instead of running it.
 
+You can specify labels for your rancher host by passing in `--label key=value` for each label.
+
 ## SaltStack example
 
 rancher.sls:
@@ -64,7 +66,7 @@ Options:
   --echo              Print the docker run command to the console, instead of
                       running it
   --sudo              Use sudo for docker run ...
-  --labels TEXT       Comma delimited list of k=v host labels
+  --label TEXT        Label to apply to host (key=value)
   --help              Show this message and exit.
 
 ```
