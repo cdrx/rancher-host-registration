@@ -64,6 +64,7 @@ Options:
   --echo              Print the docker run command to the console, instead of
                       running it
   --sudo              Use sudo for docker run ...
+  --labels TEXT       Comma delimited list of k=v host labels
   --help              Show this message and exit.
 
 ```
