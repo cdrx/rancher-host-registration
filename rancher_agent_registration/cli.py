@@ -18,7 +18,7 @@ from time import sleep
 @click.option('--sudo', default=True, is_flag=True,
               help="Use sudo for docker run ...")
 @click.option('--label', default=None, multiple=True,
-              help="Label to apply to host (key=value)")
+              help="Apply a label to the host in Rancher in key=value format (you can use --label more than once for multiple labels)")
 def main(url, key, secret, environment, echo, sudo, label):
     """Registers the current host with your Rancher server, creating the necessary registration keys."""
     # split url to protocol and host
@@ -78,7 +78,10 @@ def main(url, key, secret, environment, echo, sudo, label):
         bail("Cant register this host: Rancher didn't activate the new registration token.")
 
     if label:
-        labels = '&'.join(label)
+        for l in label:
+            if '=' not in l:
+                bail("Labels should be in the format: --label key=value")
+        labels = '&'.join([x.replace("'", "\\'") for x in label])
         point = command.find('run')+len('run')
         command = command[:point] + " -e CATTLE_HOST_LABELS='{0}'".format(labels) + command[point:]
 
