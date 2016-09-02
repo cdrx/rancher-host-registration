@@ -66,7 +66,8 @@ Options:
   --echo              Print the docker run command to the console, instead of
                       running it
   --sudo              Use sudo for docker run ...
-  --label TEXT        Label to apply to host (key=value)
+  --label TEXT        Apply a label to the host in Rancher in key=value format
+                      (you can use --label more than once for multiple labels)
   --help              Show this message and exit.
 
 ```
@@ -75,6 +76,9 @@ Options:
 
 #### [1.0] - 2016-04-02
 First release, works.
+
+### [1.1] - 2016-09-02
+Added --label option to define host labels at registration, contributed by @mbrannigan
 
 ## License
 

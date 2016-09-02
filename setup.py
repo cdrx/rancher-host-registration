@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='rancher-agent-registration',
-    version='1.0',
+    version='1.1',
     description='Command line tool to register the current host with your Rancher server',
     url='https://github.com/cdrx/rancher-host-registration',
     author='Chris Rose',
