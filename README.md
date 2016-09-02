@@ -77,7 +77,7 @@ Options:
 #### [1.0] - 2016-04-02
 First release, works.
 
-### [1.1] - 2016-09-02
+#### [1.1] - 2016-09-02
 Added --label option to define host labels at registration, contributed by @mbrannigan
 
 ## License
