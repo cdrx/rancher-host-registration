@@ -17,9 +17,11 @@ from time import sleep
               help="Print the docker run command to the console, instead of running it")
 @click.option('--sudo', default=True, is_flag=True,
               help="Use sudo for docker run ...")
+@click.option('--host-ip', default=None,
+              help="Set host IP to explicit value. Default: Let Rancher auto-detect")
 @click.option('--label', default=None, multiple=True,
               help="Apply a label to the host in Rancher in key=value format (you can use --label more than once for multiple labels)")
-def main(url, key, secret, environment, echo, sudo, label):
+def main(url, key, secret, environment, echo, sudo, host_ip, label):
     """Registers the current host with your Rancher server, creating the necessary registration keys."""
     # split url to protocol and host
     if "://" not in url:
@@ -84,6 +86,10 @@ def main(url, key, secret, environment, echo, sudo, label):
         labels = '&'.join([x.replace("'", "\\'") for x in label])
         point = command.find('run')+len('run')
         command = command[:point] + " -e CATTLE_HOST_LABELS='{0}'".format(labels) + command[point:]
+
+    if host_ip:
+        point = command.find('run')+len('run')
+        command = command[:point] + " -e CATTLE_AGENT_IP={0}".format(host_ip) + command[point:]
 
     if echo:
         msg(command)
