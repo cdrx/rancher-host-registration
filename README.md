@@ -68,6 +68,8 @@ Options:
   --sudo              Use sudo for docker run ...
   --label TEXT        Apply a label to the host in Rancher in key=value format
                       (you can use --label more than once for multiple labels)
+  --host-ip           Set host IP to explicit value, otherwise let Rancher auto
+                      detect
   --help              Show this message and exit.
 
 ```
@@ -79,6 +81,9 @@ First release, works.
 
 #### [1.1] - 2016-09-02
 Added --label option to define host labels at registration, contributed by @mbrannigan
+
+#### [1.2] - 2017-05-25
+Added --host-ip option to override the CATTLE_AGENT_IP environment variable, contributed by @palfrey
 
 ## License
 
